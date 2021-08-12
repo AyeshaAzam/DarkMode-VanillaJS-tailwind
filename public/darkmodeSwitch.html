@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dark Mode with tailwind CSS</title>
+  <link rel="stylesheet" href="./app.css">
+  <script>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  </script>
+</head>
+
+<body>
+  <nav class="bg-gray-200  dark:bg-gray-900 h-20 w-full flex items-center justify-between px-4">
+    <a href="index.html">
+      <div class="h-20 w-20 flex justify-center items-center shadow-xl">
+        <img src="https://logos-world.net/wp-content/uploads/2021/04/Upwork-Symbol.png" alt="logo" />
+      </div>
+    </a>
+
+    <!-- Toggle dark mode switch begins -->
+    <div class="dk-mode-checkbox flex  space-x-2">
+      <span class="text-sm text-gray-900  dark:text-gray-500">Light</span>
+      <input type="checkbox" id="toggle-darkmode" class="hidden">
+      <label for="toggle-darkmode">
+        <div
+          class="w-9 h-5 flex items-center bg-gray-300 dark:bg-gray-500 rounded-full  p-1 duration-300 ease-in-out dark:bg-gray-600">
+          <div
+            class="toggle-dot transform hover:translate-x-3.5   w-4 h-4 bg-white rounded-full shadow-md  duration-1000 ease-in-out">
+          </div>
+        </div>
+      </label>
+      <span class="text-sm text-gray-400 dark:text-gray-100">Dark</span>
+    </div>
+    <!-- Toggle dark mode switch ends -->
+
+  </nav>
+
+  <script>
+    let dk = document.getElementById('toggle-darkmode');
+    console.log(dk);
+    dk.addEventListener('click', function () {
+      let htmlClasses = document.querySelector('html').classList;
+
+      if (localStorage.theme == 'dark') {
+        htmlClasses.remove('dark');
+        localStorage.removeItem('theme')
+      } else {
+        htmlClasses.add('dark');
+        localStorage.theme = 'dark';
+      }
+    });
+  </script>
+</body>
+
+</html>
